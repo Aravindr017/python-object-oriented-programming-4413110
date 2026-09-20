@@ -6,15 +6,25 @@
 # that makes them sortable
 
 class Asset():
-    pass
+    def __init__(self, price):
+        self.price = price
+
+    def __lt__(self, other):
+        return self.price < other.price
     
 
 class Stock(Asset):
-    pass
+    def __init__(self, symbol, price, company):
+        super().__init__(price)
+        self.symbol = symbol
+        self.company = company
 
 
 class Bond(Asset):
-    pass
+    def __init__(self, price, description, duration):
+        super().__init__(price)
+        self.description = description
+        self.duration = duration
 
 # ~~~~~~~~~ TEST CODE ~~~~~~~~~
 stocks = [

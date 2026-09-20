@@ -5,33 +5,40 @@
 # Stocks should sort from low to high on price
 # Bonds should sort from low to high on yield
 
-from abc import ABC, abstractmethod
-
-
-class Asset(ABC):
-    def __init__(self, price):
-        self.price = price
-
-    @abstractmethod
-    def __str__(self):
-        pass
-
-
-class Stock(Asset):
+class Stock:
     def __init__(self, ticker, price, company):
-        super().__init__(price)
-        self.company = company
         self.ticker = ticker
+        self.price = price
+        self.company = company
+        
+    def __eq__(self, other):
+        return self.price == other.price
+    def __lt__(self, other):
+        return self.price < other.price
+    def __gt__(self, other):
+        return self.price > other.price
+    def __le__(self, other):
+        return self.price <= other.price
+    def __ge__(self, other):
+        return self.price >= other.price
 
-
-class Bond(Asset):
-    def __init__(self, price, description, duration, yieldamt):
-        super().__init__(price)
-        self.description = description
-        self.duration = duration
-        self.yieldamt = yieldamt
-
-
+class Bond:
+    def __init__(self, price, name, years, yield_percent):
+        self.price = price
+        self.name = name
+        self.years = years
+        self.yield_percent = yield_percent
+        
+    def __eq__(self, other):
+        return self.yield_percent == other.yield_percent
+    def __lt__(self, other):
+        return self.yield_percent < other.yield_percent
+    def __gt__(self, other):
+        return self.yield_percent > other.yield_percent
+    def __le__(self, other):
+        return self.yield_percent <= other.yield_percent
+    def __ge__(self, other):
+        return self.yield_percent >= other.yield_percent
 # ~~~~~~~~~ TEST CODE ~~~~~~~~~
 stocks = [
     Stock("MSFT", 342.0, "Microsoft Corp"),
